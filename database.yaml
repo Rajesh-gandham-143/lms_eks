@@ -1,0 +1,21 @@
+api: v1/app
+kind: Deployment
+metadata:
+  name: database
+  matchLabels: app
+spec:
+  relicas:1
+  selector:
+    matchLabels: app
+  template:
+    metadata:
+      labels: app
+    spec:
+      containers:
+        - name: database
+          image: postgres
+          ports:
+          - containerPort: 5432
+          env:
+          - name: POSTGRES_PASSWORD
+            value: password

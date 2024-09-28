@@ -1,0 +1,21 @@
+api: v1/app
+kind: Deployment
+metadata:
+  name: frontend
+  labels:
+    app: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: frontend
+        image: rajeshgandham123/node-frontend
+        ports:
+        - containerPort: 80
