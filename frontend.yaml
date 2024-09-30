@@ -1,4 +1,4 @@
-api: v1/app
+api: apps/v1
 kind: Deployment
 metadata:
   name: frontend

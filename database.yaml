@@ -1,11 +1,11 @@
-api: v1/app
+api: apps/v1
 kind: Deployment
 metadata:
   name: database
-  matchLabels: 
+  labels: 
     app: database
 spec:
-  relicas:1
+  replicas: 1
   selector:
     matchLabels: 
       app: database
