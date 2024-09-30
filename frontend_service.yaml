@@ -10,5 +10,5 @@ spec:
   ports:
     - protocol: TCP
       port: 80      # Frontend service port, usually HTTP
-      targetPort: 80 # Port your frontend listens on inside the pod
+      targetPort: 30000 # Port your frontend listens on inside the pod
   type: NodePort  # Use LoadBalancer to expose the frontend externally

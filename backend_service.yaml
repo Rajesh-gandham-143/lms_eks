@@ -10,5 +10,5 @@ spec:
   ports:
     - protocol: TCP
       port: 3000      # Service port
-      targetPort: 3000 # Port your Java app listens on inside the pod
+      targetPort: 30001 # Port your Java app listens on inside the pod
   type: NodePort  # Use LoadBalancer if you want to expose it externally
