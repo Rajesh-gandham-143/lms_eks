@@ -23,4 +23,10 @@ spec:
                 secretKeyRef:
                   name: postgres-secret
                   key: password
-
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data  # Path inside the pod
+              name: db-storage
+      volumes:
+        - name: db-storage
+          persistentVolumeClaim:
+            claimName: lms-db-pvc
