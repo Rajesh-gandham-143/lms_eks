@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service
+  labels:
+    app: frontend
+spec:
+  selector:
+    app: frontend
+  ports:
+    - protocol: TCP
+      port: 80      # Frontend service port, usually HTTP
+      targetPort: 80 # Port your frontend listens on inside the pod
+  type: NodePort  # Use LoadBalancer to expose the frontend externally

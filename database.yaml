@@ -2,14 +2,17 @@ api: v1/app
 kind: Deployment
 metadata:
   name: database
-  matchLabels: app
+  matchLabels: 
+    app: database
 spec:
   relicas:1
   selector:
-    matchLabels: app
+    matchLabels: 
+      app: database
   template:
     metadata:
-      labels: app
+      labels: 
+        app: database
     spec:
       containers:
         - name: database
