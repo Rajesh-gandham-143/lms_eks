@@ -1,14 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: backend-service
-  labels:
-    app: backend
+  name: lms-be-service
 spec:
-  selector:
-    app: backend
+  type: NodePort
   ports:
-    - protocol: TCP
-      port: 3000      # Service port
-      targetPort: 30001 # Port your Java app listens on inside the pod
-  type: NodePort  # Use LoadBalancer if you want to expose it externally
+    - port: 3000               # The port that the service will expose
+      targetPort: 3000         # The port the application listens on in the pod
+      nodePort: 32100          # Optional: Specify the NodePort explicitly or let Kubernetes assign one
+  selector:
+    app: lms-be                # The label selector to target the correct pods

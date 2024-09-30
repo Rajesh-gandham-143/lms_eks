@@ -1,21 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend
-  labels:
-    app: frontend
+  name: lms-fe
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: frontend
+      app: lms-fe
   template:
     metadata:
       labels:
-        app: frontend
+        app: lms-fe
     spec:
       containers:
-      - name: frontend
-        image: rajeshgandham123/node-frontend
-        ports:
-        - containerPort: 80
+        - name: frontend-container
+          image: ravi2krishna/lms-fe
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
