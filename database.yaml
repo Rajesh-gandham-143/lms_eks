@@ -30,3 +30,16 @@ spec:
         - name: db-storage
           persistentVolumeClaim:
             claimName: lms-db-pvc
+
+# services file
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-cluster-ip-service
+spec:
+  type: LoadBalancer
+  selector:
+    component: postgres
+  ports:
+    - port: 5432
+      targetPort: 5432
