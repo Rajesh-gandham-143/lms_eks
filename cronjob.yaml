@@ -15,7 +15,7 @@ spec:
               args:
                 - |
                   # Install required tools
-                  yum install -y curl unzip && \
+                  apt install -y curl unzip && \
                   # Download the AWS CLI bundle
                   curl "https://s3.amazonaws.com/aws-cli/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
                   # Unzip the AWS CLI bundle
