@@ -3,30 +3,31 @@ kind: CronJob
 metadata:
   name: postgres-backup
 spec:
-  schedule: "* * * * *"  # Adjust the cron schedule as needed
+  schedule: "0 * * * *"  # Adjust the cron schedule as needed (this example runs at the top of every hour)
   jobTemplate:
     spec:
       template:
         spec:
           containers:
             - name: postgres-backup
-              image: ubuntu:latest  # Use a suitable Ubuntu image
-              command: ["/bin/bash", "-c"]
+              image: amazonlinux:latest  # Use a lightweight image with AWS CLI installed
+              command: ["/bin/sh", "-c"]
               args:
                 - |
-                  apt-get update && \
-                  apt-get install -y postgresql-client awscli && \
-                  PGHOST=postgres-cluster-ip-service.default.svc.cluster.local && \
-                  PGUSER=postgres && \
-                  PGPASSWORD=$(cat /mnt/secrets/postgres-password) && \
-                  pg_dumpall > /tmp/backup.sql && \
+                  # Install AWS CLI in the container
+                  apt install -y aws-cli && \
+                  # Get the name of the PostgreSQL pod
+                  POD_NAME=$(kubectl get pods --selector=component=postgres -o jsonpath='{.items[0].metadata.name}') && \
+                  # Execute pg_dump inside the PostgreSQL pod and create a backup
+                  kubectl exec $POD_NAME -- pg_dumpall -U postgres > /tmp/backup.sql && \
+                  # Copy the backup file to S3
                   aws s3 cp /tmp/backup.sql s3://lms-appdata/backups/backup-$(date +%Y%m%d%H%M%S).sql
               volumeMounts:
-                - name: postgres-secret-volume
+                - name: aws-secret-volume
                   mountPath: /mnt/secrets  # Path to mount the secret
                   readOnly: true
           restartPolicy: OnFailure
           volumes:
-            - name: postgres-secret-volume
+            - name: aws-secret-volume
               secret:
-                secretName: postgres-secret  # Your secret containing the password
+                secretName: aws-secret  # Replace with your AWS secret name that contains credentials
