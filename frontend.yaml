@@ -14,13 +14,11 @@ spec:
     spec:
       containers:
         - name: frontend-container
-          image: ravi2krishna/lms-fe
+          image: rajeshgandham123/node-fe
           imagePullPolicy: Always
           ports:
             - containerPort: 80
-          env:
-            - name: BACKEND_URL
-              value: "http://a22c391e5d9aa4af7821e24ae205ed68-1651720342.ap-southeast-2.elb.amazonaws.com:3000"  # Backend service URL
+          
 
 ---
 apiVersion: v1
