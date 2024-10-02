@@ -10,7 +10,7 @@ spec:
         spec:
           containers:
             - name: postgres-backup
-              image: amazonlinux:latest  # Use a lightweight image with AWS CLI installed
+              image: ubuntu:latest  # Use a lightweight image with AWS CLI installed
               command: ["/bin/sh", "-c"]
               args:
                 - |
