@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: postgres-backup
 spec:
-  schedule: "0 * * * *"  # Adjust the cron schedule as needed (this example runs at the top of every hour)
+  schedule: "* * * * *"  # Adjust the cron schedule as needed (this example runs at the top of every hour)
   jobTemplate:
     spec:
       template:
