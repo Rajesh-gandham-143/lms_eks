@@ -3,18 +3,19 @@ kind: CronJob
 metadata:
   name: postgres-backup
 spec:
-  schedule: "* * * * *"  # Runs at the top of every hour
+  schedule: "* * * * *"  # Adjust the cron schedule as needed
   jobTemplate:
     spec:
       template:
         spec:
           containers:
             - name: postgres-backup
-              image: amazonlinux:latest  # Image with necessary tools installed
-              command: ["/bin/sh", "-c"]
+              image: ubuntu:latest  # Use a suitable Ubuntu image
+              command: ["/bin/bash", "-c"]
               args:
                 - |
-                  yum install -y postgresql aws-cli && \  # Combined install command for efficiency
+                  apt-get update && \
+                  apt-get install -y postgresql-client awscli && \
                   PGHOST=postgres-cluster-ip-service.default.svc.cluster.local && \
                   PGUSER=postgres && \
                   PGPASSWORD=$(cat /mnt/secrets/postgres-password) && \
@@ -28,4 +29,4 @@ spec:
           volumes:
             - name: postgres-secret-volume
               secret:
-                secretName: postgres-secret  # Secret name for password
+                secretName: postgres-secret  # Your secret containing the password

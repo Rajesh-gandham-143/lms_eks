@@ -8,5 +8,6 @@ spec:
     storage: 10Gi
   accessModes:
     - ReadWriteOnce
-  hostPath:
-    path: "/mnt/data"  # Path on the node where data will be stored
+  volumeMounts:
+                - name: postgres-secret-volume
+                  mountPath: /mnt/secrets  # Path on the node where data will be stored
