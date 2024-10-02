@@ -14,8 +14,16 @@ spec:
               command: ["/bin/sh", "-c"]
               args:
                 - |
-                  # Install AWS CLI in the container
-                  apt install -y aws-cli && \
+                   # Install required tools
+                  yum install -y curl unzip && \
+                  # Download the AWS CLI bundle
+                  curl "https://s3.amazonaws.com/aws-cli/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
+                  # Unzip the AWS CLI bundle
+                  unzip awscliv2.zip && \
+                  # Install AWS CLI
+                  sudo ./aws/install && \
+                  # Clean up
+                  rm -rf awscliv2.zip aws/ && \
                   # Get the name of the PostgreSQL pod
                   POD_NAME=$(kubectl get pods --selector=component=postgres -o jsonpath='{.items[0].metadata.name}') && \
                   # Execute pg_dump inside the PostgreSQL pod and create a backup
