@@ -15,7 +15,11 @@ spec:
               args:
                 - |
                   # Install required tools
-                  apt-get update && apt-get install -y curl unzip && \
+                  apt-get update && apt-get install -y curl unzip apt-transport-https gnupg && \
+                  curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
+                  echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" > /etc/apt/sources.list.d/kubernetes.list && \
+                  apt-get update && apt-get install -y kubectl && \
+                  mv kubectl /usr/local/bin/kubectl && \
                   # Download the AWS CLI bundle
                   curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
                   # Unzip the AWS CLI bundle
