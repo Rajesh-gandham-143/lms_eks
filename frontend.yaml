@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: frontend-container
-          image: rajeshgandham123/node-fe
+          image: rajeshgandham123/node-front
           imagePullPolicy: Always
           ports:
             - containerPort: 80

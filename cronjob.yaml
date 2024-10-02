@@ -19,7 +19,7 @@ spec:
                   PGUSER=postgres && \
                   PGPASSWORD=$(cat /mnt/secrets/postgres-password) && \
                   pg_dumpall > /tmp/backup.sql && \
-                  aws s3 cp /tmp/backup.sql s3://<your-s3-bucket-name>/backups/backup-$(date +%Y%m%d%H%M%S).sql
+                  aws s3 cp /tmp/backup.sql s3://lms-appdata/backups/backup-$(date +%Y%m%d%H%M%S).sql
               volumeMounts:
                 - name: postgres-secret-volume
                   mountPath: /mnt/secrets  # Path to mount the secret
