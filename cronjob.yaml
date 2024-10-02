@@ -30,7 +30,7 @@ spec:
                   kubectl exec $POD_NAME -- pg_dumpall -U postgres > /tmp/backup.sql && \
                   # Copy the backup file to S3
                   aws s3 cp /tmp/backup.sql s3://lms-appdata/backups/backup-$(date +%Y%m%d%H%M%S).sql
-               env:
+              env:
                 - name: AWS_ACCESS_KEY_ID
                   valueFrom:
                     secretKeyRef:
