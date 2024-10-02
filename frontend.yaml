@@ -20,7 +20,7 @@ spec:
             - containerPort: 80
           env:
             - name: BACKEND_URL
-              value: "http://lms-be-service:3000"  # Backend service URL
+              value: "http://a22c391e5d9aa4af7821e24ae205ed68-1651720342.ap-southeast-2.elb.amazonaws.com:32516"  # Backend service URL
 
 ---
 apiVersion: v1
